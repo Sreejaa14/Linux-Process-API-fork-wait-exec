@@ -128,11 +128,10 @@ int main() {
 
 ##OUTPUT
 
+/home/sreejaa/Desktop/Screenshot at 2026-03-19 05-03-14.png
 
 
 
-
-<img width="683" height="358" alt="Screenshot at 2026-03-19 03-45-59" src="https://github.com/user-attachments/assets/a54f2841-25c0-47a4-ab29-dac7c3722302" />
 
 
 
