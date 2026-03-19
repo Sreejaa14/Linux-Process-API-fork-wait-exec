@@ -50,6 +50,7 @@ int main() {
 
 ##OUTPUT
 
+<img width="395" height="180" alt="Screenshot at 2026-03-19 03-45-46" src="https://github.com/user-attachments/assets/e25e68b9-bdf8-4dbc-b0e9-98a499398eaf" />
 
 
 
@@ -59,7 +60,48 @@ int main() {
 
 ## C Program to execute Linux system commands using Linux API system calls exec() , exit() , wait() family
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
+int main() {
+    int status;
+
+    printf("Running ps with execl\n");
+    if (fork() == 0) {
+        execl("/bin/ps", "ps", "-f", NULL);   // full path required
+        perror("execl failed");
+        exit(1);
+    }
+    wait(&status);
+
+    if (WIFEXITED(status)) {
+        printf("Child exited with status: %d\n", WEXITSTATUS(status));
+    } 
+    else {
+        printf("Child did not exit successfully\n");
+    }
+
+    printf("Running ps with execlp (without full path)\n");
+    if (fork() == 0) {
+        execlp("ps", "ps", "-f", NULL);   // execlp searches PATH
+        perror("execlp failed");
+        exit(1);
+    }
+    wait(&status);
+
+    if (WIFEXITED(status)) {
+        printf("Child exited for execlp with status: %d\n", WEXITSTATUS(status));
+    } 
+    else {
+        printf("Child did not exit successfully\n");
+    }
+
+    printf("Done.\n");
+    return 0;
+}
 
 
 
@@ -90,6 +132,7 @@ int main() {
 
 
 
+<img width="683" height="358" alt="Screenshot at 2026-03-19 03-45-59" src="https://github.com/user-attachments/assets/a54f2841-25c0-47a4-ab29-dac7c3722302" />
 
 
 
